@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Surprise for Ashuu 🎁</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;font-family:Georgia,'Times New Roman',serif;color:#fff;background:linear-gradient(160deg,#2a0a3d,#6b1b5e 55%,#c2417a);display:flex;align-items:center;justify-content:center;text-align:center;overflow-x:hidden}
+.wrap{padding:24px;max-width:420px;width:100%;position:relative;z-index:2}
+.icon{font-size:64px;animation:float 3s ease-in-out infinite}
+h1{font-size:28px;margin:12px 0 6px;font-weight:normal}
+p{margin:6px 0;opacity:.9;line-height:1.5}
+.timer{display:flex;gap:10px;justify-content:center;margin:24px 0}
+.box{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:12px 0;width:72px}
+.box b{display:block;font-size:30px;font-variant-numeric:tabular-nums}
+.box span{font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.8}
+a.btn{display:none;margin-top:22px;background:#fff;color:#a3205f;text-decoration:none;font-weight:bold;padding:16px 30px;border-radius:40px;font-size:18px;box-shadow:0 8px 24px rgba(0,0,0,.3);animation:pulse 1.6s infinite}
+.open a.btn{display:inline-block}
+.open .timer,.open .lockmsg{display:none}
+.openmsg{display:none}
+.open .openmsg{display:block}
+.heart{position:fixed;bottom:-30px;font-size:20px;opacity:.6;animation:rise linear infinite;z-index:1}
+@keyframes rise{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes pulse{50%{transform:scale(1.06)}}
+</style>
+</head>
+<body>
+<div class="wrap" id="w">
+  <div class="icon" id="ic">🔒</div>
+  <h1 id="t">Ek surprise tumhara intezar kar raha hai…</h1>
+  <p class="lockmsg">Ye raat 12:00 baje khulega ✨<br>Thora sa intezar karo 💖</p>
+  <p class="openmsg">Happy Birthday, Ashuu! 🎂<br>Tumhare liye ek chhota sa surprise 💝</p>
+  <div class="timer">
+    <div class="box"><b id="h">--</b><span>Hours</span></div>
+    <div class="box"><b id="m">--</b><span>Min</span></div>
+    <div class="box"><b id="s">--</b><span>Sec</span></div>
+  </div>
+  <a class="btn" id="go" target="_blank" rel="noopener">Open your surprise 🎁</a>
+</div>
+<script>
+// Pakistan time (UTC+5): 3 Oct 2026, 12:00 AM
+var T = new Date("2026-10-03T00:00:00+05:00").getTime();
+var L = atob("aHR0cHM6Ly93d3cuam95Z3JhbS5pby9jL2FzaHV1LTIwMjYtdjAwZW8xZjlhNWkw");
+var w=document.getElementById('w');
+function p(n){return String(n).padStart(2,'0')}
+function tick(){
+  var d=T-Date.now();
+  if(d<=0){
+    w.classList.add('open');
+    document.getElementById('ic').textContent='🎉';
+    document.getElementById('t').textContent='Happy Birthday! 🎂';
+    var g=document.getElementById('go'); g.href=L;
+    return;
+  }
+  var hrs=Math.floor(d/3600000);
+  document.getElementById('h').textContent=p(hrs);
+  document.getElementById('m').textContent=p(Math.floor(d%3600000/60000));
+  document.getElementById('s').textContent=p(Math.floor(d%60000/1000));
+  setTimeout(tick,250);
+}
+tick();
+for(var i=0;i<14;i++){
+  var e=document.createElement('div');e.className='heart';
+  e.textContent=['💖','✨','🎈','💗'][i%4];
+  e.style.left=(Math.random()*95)+'%';
+  e.style.animationDuration=(8+Math.random()*8)+'s';
+  e.style.animationDelay=(-Math.random()*10)+'s';
+  document.body.appendChild(e);
+}
+</script>
+</body>
+</html>
